@@ -37,9 +37,10 @@ class PageController extends AbstractController
     }
 
     #[Route('/team', name: 'team')]
-    public function team(): Response
+    public function team(TeamService $teamservice): Response
     {
-        return $this->render('page/team.html.twig', []);
+        $team = $teamservice->getTeams();
+        return $this->render('page/team.html.twig', compact('team'));
     }
 
     #[Route('/testimonial', name: 'testimonial')]
