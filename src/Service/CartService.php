@@ -2,18 +2,17 @@
 namespace App\Service;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class CartService{
+class CartService
+{
     private const KEY = '_cart';
     private $requestStack;
-    public function __construct(RequestStack $requestStack)
-    {
+    public function __construct(RequestStack $requestStack){
         $this->requestStack = $requestStack;
     }
-    public function getSession()
-    {
+    public function getSession(){
         return $this->requestStack->getSession();
     }
-    public function getCart(): array {
+    public function getCart(){
         return $this->getSession()->get(self::KEY, []);
     }
     public function add(int $id, int $quantity = 1){
@@ -35,5 +34,9 @@ class CartService{
         if (array_key_exists($id, $cart))
             unset($cart[$id]);
         $this->getSession()->set(self::KEY, $cart);
+    }
+    public function totalItems(){
+        $cart = $this->getCart();
+        return array_sum($cart);
     }
 }

@@ -12,7 +12,11 @@
 		<a href="{{ path('about') }}" class="nav-item nav-link {{ (app.request.attributes.get('_route') == 'about')  ? 'active': ''}}">About</a>
 		<a href="{{ path('service') }}" class="nav-item nav-link {{ (app.request.attributes.get('_route') == 'service')  ? 'active': ''}}">Service</a>
 		<a href="{{ path('product') }}" class="nav-item nav-link {{ (app.request.attributes.get('_route') == 'product')  ? 'active': ''}}">Product</a>
-		<a href="{{ path('cart') }}" class="nav-item nav-link {{ (app.request.attributes.get('_route') == 'cart')  ? 'active': ''}}">Cart</a>
+		{% if cart.totalItems() > 0 %}
+			<a href="{{ path('cart') }}" class="nav-item nav-link {{ (app.request.attributes.get('_route') == 'cart') ? 'active': ''}}">Cart ({{ cart.totalItems() }})</a>
+		{% else %}
+			<a href="{{ path('cart') }}" class="nav-item nav-link {{ (app.request.attributes.get('_route') == 'cart') ? 'active': ''}}">Cart</a>
+		{% endif %}
 
 		<div class="nav-item dropdown">
 			<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
