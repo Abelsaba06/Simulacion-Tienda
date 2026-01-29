@@ -23,15 +23,31 @@ final class CartController extends AbstractController
         $this->cart = $cart;
     }
 
-    #[Route('/delete/{id}', name: 'cart_delete',methods: ['GET', 'POST'])]
-    public function cart_delete(int $id): Response
+    #[Route('/delete/{id}/one', name: 'cart_delete_one', methods: ['GET', 'POST'])]
+    public function cart_delete_one(int $id): Response
     {
-        $product = $this->repository->find($id);
-        $this->cart->remove($id);
-        return new JsonResponse("", Response::HTTP_OK);
+        $cart = $this->cart->getCart();
+        $currentQuantity = $cart[$id] ?? 0;
+
+        if ($currentQuantity > 1) {
+            $this->cart->update($id, $currentQuantity - 1);
+        } else {
+            $this->cart->remove($id);
+        }
+        return $this->redirectToRoute('cart');
     }
 
-    #[Route('/update/{id}/{quantity}', name: 'cart_update',methods: ['GET', 'POST'])]
+    #[Route('/delete/{id}', name: 'cart_delete', methods: ['GET', 'POST'])]
+    public function cart_delete(int $id): Response
+    {
+
+        $product = $this->repository->find($id);
+        $this->cart->remove($id);
+        return $this->redirectToRoute('cart');
+
+    }
+
+    #[Route('/update/{id}/{quantity}', name: 'cart_update', methods: ['GET', 'POST'])]
     public function cart_update(int $id, int $quantity): Response
     {
         $product = $this->repository->find($id);
