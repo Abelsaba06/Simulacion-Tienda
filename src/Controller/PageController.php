@@ -10,18 +10,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class PageController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(TeamService $teamservice,ProductService $productService): Response
+    public function index(TeamService $teamservice, ProductService $productService): Response
     {
-        $products=$productService->getProducts();
-        $team=$teamservice->getTeams();
-        return $this->render('page/index.html.twig',compact('team','products'));
+        $products = $productService->getProducts();
+        $team = $teamservice->getTeams();
+        return $this->render('page/index.html.twig', compact('team', 'products'));
     }
 
     #[Route('/about', name: 'about')]
     public function about(TeamService $teamservice): Response
     {
-        $team=$teamservice->getTeams();
-        return $this->render('page/about.html.twig',compact('team'));
+        $team = $teamservice->getTeams();
+        return $this->render('page/about.html.twig', compact('team'));
     }
 
     #[Route('/service', name: 'service')]
@@ -52,6 +52,11 @@ class PageController extends AbstractController
     public function contact(): Response
     {
         return $this->render('page/contact.html.twig', []);
+    }
+    #[Route('/buy', name: 'buy')]
+    public function buy(): Response
+    {
+        return $this->render('cart/buy.html.twig', []);
     }
 
 }
