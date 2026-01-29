@@ -84,7 +84,7 @@ final class CartController extends AbstractController
     {
         $this->cart->removeAll();
         return $this->redirectToRoute('index');
-    }
+    }   
 
     #[Route('/', name: 'cart')]
     public function index(): Response

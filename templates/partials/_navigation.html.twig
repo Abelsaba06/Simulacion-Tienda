@@ -17,6 +17,16 @@
 		{% else %}
 			<a href="{{ path('cart') }}" class="nav-item nav-link {{ (app.request.attributes.get('_route') == 'cart') ? 'active': ''}}">Cart</a>
 		{% endif %}
+		{% if is_granted('ROLE_ADMIN') %}
+			<a href="{{ path('admin') }}" class="nav-item nav-link">Admin</a>
+		{% endif %}
+		{% if app.user %}
+			<a href="{{ path('app_logout') }}" class="nav-item nav-link">Logout</a>
+		{% else %}
+			<a href="{{ path('app_login') }}" class="nav-item nav-link">Login</a>
+			<a href="{{ path('app_register') }}" class="nav-item nav-link">Register</a>
+		{% endif %}
+		
 
 		<div class="nav-item dropdown">
 			<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
@@ -26,15 +36,6 @@
 				<a href="{{ path('testimonial') }}" class="dropdown-item">Testimonial</a>
 				<a href="{{ path('blog') }}" class="dropdown-item">Blog Grid</a>
 				<a href="{{ path('detail') }}" class="dropdown-item">Blog Detail</a>
-				{% if app.user %}
-					<a href="{{ path('app_logout') }}" class="dropdown-item">Logout</a>
-				{% else %}
-					<a href="{{ path('app_login') }}" class="dropdown-item">Login</a>
-					<a href="{{ path('app_register') }}" class="dropdown-item">Register</a>
-				{% endif %}
-				{% if is_granted('ROLE_ADMIN') %}
-					<a href="{{ path('admin') }}" class="dropdown-item">Admin</a>
-				{% endif %}
 			</div>
 		</div>
 		<a href="{{ path('contact') }}" class="nav-item nav-link nav-contact bg-primary text-white px-5 ms-lg-5">Contact
