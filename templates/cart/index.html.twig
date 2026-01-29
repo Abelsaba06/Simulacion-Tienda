@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+{% block title %}Cart{% endblock %}
+{% block body %}
+    <!-- Cart Start -->
+    <div class="container py-5">
+        <div class="row g-5">
+            <!-- Cart list Start -->
+            <div class="col-lg-8">
+               {% for item in items %}
+                    {{ include ('cart/item.html.twig', {'item' : item}) }}
+                {% endfor %}
+            </div>
+            
+            <!-- Cart list End -->
+
+            <!-- Sidebar Start -->
+            <div class="col-lg-4">
+                <!-- Plain Text Start -->
+                <div>
+                    <h3 class="text-uppercase border-start border-5 border-primary ps-3 mb-4">Cart</h3>
+                    <div class="bg-light text-center" style="padding: 30px;">
+                        <div class="d-flex mb-3">
+                            <h4 id='totalCart' class="text-uppercase ps-3 mb-4">Total {{totalCart |number_format(2, ',', '.') }} €</h4>
+                        </div>
+                        <a href="" class="btn btn-primary py-2 px-4">Checkout</a>
+                    </div>
+                </div>
+                <!-- Plain Text End -->
+            </div>
+            <!-- Sidebar End -->
+        </div>
+    </div>
+    <!-- Blog End -->
+{% endblock %}
