@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block title %}Comprar{% endblock %}
 {% block body %}
-    <form>
+    <form action="{{ path('cart_validate') }}" method="post">
         <div class="row g-3">
             <div class="col-12">
                 <input type="text" class="form-control bg-light border-0 px-4" placeholder="Your Credit Card Number" style="height: 55px;">
@@ -13,7 +13,7 @@
                 <input type="text" class="form-control bg-light border-0 px-4" placeholder="Your CVV" style="height: 55px;">
             </div>
             <div class="col-12">
-                <button class="btn btn-primary w-100 py-3" type="submit">Comprar</button>
+                <button class="btn btn-primary w-100 py-3" type="submit">Buy</button>
             </div>
         </div>
     </form>

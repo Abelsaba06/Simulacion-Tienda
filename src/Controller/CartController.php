@@ -79,6 +79,13 @@ final class CartController extends AbstractController
         return new JsonResponse($data, Response::HTTP_OK);
     }
 
+    #[Route('/validate', name: 'cart_validate', methods: ['POST'])]
+    public function cart_validate(): Response
+    {
+        $this->cart->removeAll();
+        return $this->redirectToRoute('index');
+    }
+
     #[Route('/', name: 'cart')]
     public function index(): Response
     {

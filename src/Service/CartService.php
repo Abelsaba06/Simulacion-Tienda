@@ -35,6 +35,9 @@ class CartService
             unset($cart[$id]);
         $this->getSession()->set(self::KEY, $cart);
     }
+    public function removeAll(){
+        $this->getSession()->remove(self::KEY);
+    }
     public function totalItems(){
         $cart = $this->getCart();
         return array_sum($cart);
