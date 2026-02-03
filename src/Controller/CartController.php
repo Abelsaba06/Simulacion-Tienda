@@ -82,6 +82,9 @@ final class CartController extends AbstractController
     #[Route('/validate', name: 'cart_validate', methods: ['POST'])]
     public function cart_validate(): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
         $this->cart->removeAll();
         return $this->redirectToRoute('index');
     }   
@@ -89,6 +92,9 @@ final class CartController extends AbstractController
     #[Route('/', name: 'cart')]
     public function index(): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
         $products = $this->repository->getFromCart($this->cart);
         //hay que añadir la cantidad de cada producto
         $items = [];

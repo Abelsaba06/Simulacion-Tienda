@@ -57,6 +57,9 @@ class PageController extends AbstractController
     #[Route('/buy', name: 'buy')]
     public function buy(): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
         return $this->render('cart/buy.html.twig', []);
     }
 

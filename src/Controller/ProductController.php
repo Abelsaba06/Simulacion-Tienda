@@ -12,6 +12,9 @@ class ProductController extends AbstractController
     #[Route('/product', name: 'product')]
     public function index(ProductService $productService): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
         $products=$productService->getProducts();
         return $this->render('product/product.html.twig', compact('products'));
     }
